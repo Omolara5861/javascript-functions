@@ -41,25 +41,28 @@ const printCells = (state) => {
       for(let x = bottomLeft[0]; x <= topRight[0]; x++) {
         row.push(printCell([x,y], state));
       }
-      accumulator += row.join('.') + '\n';
+      accumulator += row.join(' ') + '\n';
     }
     return accumulator;
 };
 
-const getNeighborsOf = ([x, y]) => {
-    [x - 1, y + 1], [x, y + 1],[x + 1, y + 1],[x - 1, y],
-    [x + 1, y], [x - 1, y - 1], [x , y - 1], [x + 1, y - 1];
-};
+const getNeighborsOf = ([x, y]) => [
+  [x-1, y+1], [x,y +1],[x+1, y+1],
+  [x-1, y],            [x+1, y], 
+  [x-1, y-1], [x , y-1], [x+1, y-1]
+];
+
 
 const getLivingNeighbors = (cell, state) => {
-  return getNeighborsOf(cell).filter(n => contains.bind(state, n));
+  return getNeighborsOf(cell).filter(n => contains.bind(state)(n));
 };
 
 const willBeAlive = (cell, state) => {
   const livingNeighbors = getLivingNeighbors(cell, state);
 
   return(
-    livingNeighbors.length === 3 || (contains.call(state, cell) && livingNeighbors ===2)
+    livingNeighbors.length === 3 || 
+    (contains.call(state, cell) && livingNeighbors.length ===2)
   );
 };
 
@@ -84,7 +87,7 @@ const iterate = (state, iterations) => {
 
 const main = (pattern, iterations) => {
   const results = iterate(startPatterns[pattern], iterations);
-  results.forEach(r => console.log(printCell(r)));
+  results.forEach(r => console.log(printCells(r)));
 };
 
 const startPatterns = {
