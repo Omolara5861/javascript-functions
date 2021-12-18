@@ -1,4 +1,6 @@
-function seed() {}
+function seed() {
+    return [...arguments];
+}
 
 function same([x, y], [j, k]) {}
 
@@ -6,7 +8,7 @@ function same([x, y], [j, k]) {}
 function contains(cell) {}
 
 const printCell = (cell, state) => {};
-
+seed
 const corners = (state = []) => {};
 
 const printCells = (state) => {};
