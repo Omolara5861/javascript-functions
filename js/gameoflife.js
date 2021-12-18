@@ -35,7 +35,7 @@ const corners = (state = []) => {
 
 const printCells = (state) => {
     const {bottomLeft, topRight} = corners(state);
-    accumulator = '';
+    let accumulator = '';
     for(let y = topRight[1]; y >= bottomLeft[1]; y--) {
       let row = [];
       for(let x = bottomLeft[0]; x <= topRight[0]; x++) {
@@ -46,7 +46,10 @@ const printCells = (state) => {
     return accumulator;
 };
 
-const getNeighborsOf = ([x, y]) => {};
+const getNeighborsOf = ([x, y]) => {
+    [x - 1, y + 1], [x, y + 1],[x + 1, y + 1],[x - 1, y],
+    [x + 1, y], [x - 1, y - 1], [x , y - 1], [x + 1, y - 1];
+};
 
 const getLivingNeighbors = (cell, state) => {};
 
