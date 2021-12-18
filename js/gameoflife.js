@@ -23,8 +23,8 @@ const corners = (state = []) => {
     }
     }
 
-    const xs = state.map((x, _) => x);
-    const ys = state.map((_, y) => y);
+    const xs = state.map(([x, _]) => x);
+    const ys = state.map(([_, y]) => y);
 
     return {
       topRight: [Math.max(...xs), Math.max(...ys)],
@@ -33,7 +33,18 @@ const corners = (state = []) => {
 
 };
 
-const printCells = (state) => {};
+const printCells = (state) => {
+    const {bottomLeft, topRight} = corners(state);
+    accumulator = '';
+    for(let y = topRight[1]; y >= bottomLeft[1]; y--) {
+      let row = [];
+      for(let x = bottomLeft[0]; x <= topRight[0]; x++) {
+        row.push(printCell([x,y], state));
+      }
+      accumulator += row.join('.') + '\n';
+    }
+    return accumulator;
+};
 
 const getNeighborsOf = ([x, y]) => {};
 
